@@ -46,11 +46,15 @@ app.get("/collection/:collectionName", (req, res) => {
 });
 
 // Search
-app.post("/search/collection/lessons/", (req, res) => {
+app.get("/search/collection/lessons/", (req, res) => {
   try {
-    var search = req.body.search;
-    var sort = req.body.sort || "title";
-    var order = req.body.order == "desc" ? -1 : 1;
+    var search = req.query.search;
+    var sort = req.query.sort || "title";
+    var order = req.query.order == "desc" ? -1 : 1;
+
+    if (search) {
+      console.log('Search query: ', search)
+    }
 
     if (search) {
       search = {
